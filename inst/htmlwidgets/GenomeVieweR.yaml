@@ -5,3 +5,19 @@
 #    src:
 #    script:
 #    stylesheet:
+dependencies:
+ - name: GenomeD3Plot
+   version: 1.0.0
+   src: htmlwidgets/lib/GenomeD3Plot
+   script:
+      d3/d3.min.js
+      d3/d3-tip.js
+      circularplot.js
+      linearplot.js
+      linearbrush.js
+      # The following three are needed for save feature
+      # canvg/rgbcolor.js
+      # canvg/canvg.js
+      # FileSaver/FileSaver.js
+   stylesheet:
+      examples/tracks.css
