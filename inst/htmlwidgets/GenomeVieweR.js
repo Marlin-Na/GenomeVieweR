@@ -1,28 +1,63 @@
+
 HTMLWidgets.widget({
 
-  name: 'GenomeVieweR',
+    name: 'GenomeVieweR',
 
-  type: 'output',
+    type: 'output',
 
-  factory: function(el, width, height) {
+    factory: function(el, width, height) {
 
-    // TODO: define shared variables for this instance
+        // TODO: define shared variables for this instance
 
-    return {
+        return {
 
-      renderValue: function(x) {
+            renderValue: function(x) {
+                // Initialize the dom
+                var l_node = document.createElement("DIV");
+                l_node.id = el.id + "_linear";
+                el.appendChild(l_node);
 
-        // TODO: code to render the widget, e.g.
-        el.innerText = x.message;
+                // Refer: https://bl.ocks.org/lairdm/c6c235dbfa6e6ee61565
+                var linearlayout = {
+                    genomesize: 6264404,
+                    height: 250,
+                    width: 900,
+                    //container: "#linearchart",
+                    container: "#" + l_node.id,
+                    initStart: 0,
+                    initEnd: 200000
+                };
 
-      },
+                var Get = function(url) {
+                    var Httpreq = new XMLHttpRequest();
+                    Httpreq.open("GET", url, false);
+                    Httpreq.send(null);
+                    return Httpreq.responseText;          
+                };
 
-      resize: function(width, height) {
+                // var tracks = x.tracks;
 
-        // TODO: code to re-render the widget with a new size
+                var linearTrack = new genomeTrack(linearlayout, tracks);
 
-      }
+                // Callbacks
+                var linearPopup = function(trackName, d) {
+                    alert("Received click event from track" + trackName +
+                          ", item: " + JSON.stringify(d));
+                };
+                var linearClick = function(trackName, d) {
+                    window.open("https://github.com/lairdm/islandplot", '_blank');
+                };
 
-    };
-  }
+                return;
+            },
+
+            resize: function(width, height) {
+
+                // TODO: code to re-render the widget with a new size
+
+            }
+
+        };
+    }
 });
+
